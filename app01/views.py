@@ -154,4 +154,5 @@ def send_msg(req):
 
     res = requests.post(url=url,data=json.dumps(post_data,ensure_ascii=False).encode('utf-8'),headers={'Content-Type': "application/json"}) # application/json,json.dumps(post_data)
     print(res.text)
-    return HttpResponse('...')
+    return HttpResponse('.hhehe..')
+#change 1.47
