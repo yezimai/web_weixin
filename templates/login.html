@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微信网页DIY</title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+    <img id='img' src="https://login.weixin.qq.com/qrcode/{{ uuid }}" alt="">
+
+
+    <script>
+        $(function () {
+            checkLogin();
+        });
+        function checkLogin() {
+            $.ajax({
+                url:'/check_login.html',
+                type:'get',
+                data:{},
+                dataType:'JSON',
+                success:function (arg) {
+                    if(arg.code == 408){
+                        checkLogin();
+                    }else if (arg.code == 201){
+                        $('#img').attr('src',arg.data);
+                        checkLogin();
+                    }else{
+                        location.href = '/index.html'
+{#                        pass#}
+                    }
+
+                }
+            })
+        }
+    </script>
+</body>
+</html>

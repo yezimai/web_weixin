@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/jquery-1.12.4.js"></script>
+</head>
+<body>
+     <h1>发送消息</h1>
+        <input placeholder="接受者" id="to" />
+        <input placeholder="消息内容" id="msg" />
+        <input type="button" value="发送" onclick="sendMsg();" />
+    <div>用户列表（{{ user_list.MemberCount }}）</div>
+    {% for user in user_list.MemberList %}
+        <div username="{{ user.UserName }}">
+{#            <img style="width: 50px;height: 50px;" src="/avatar.html?prev={{ user.HeadImgUrl }}"><span>{{ user.NickName }}</span>#}
+            <span>{{ user.NickName }}</span>
+        </div>
+    {% endfor %}
+</body>
+<script>
+    function  sendMsg() {
+    $.ajax({
+        url: '/send_msg.html',
+        type: "POST",
+        data: {'to': $('#to').val(), 'msg': $('#msg').val()},
+        success:function (arg) {
+{#            alert(arg);#}
+        }
+    })
+}
+</script>
+</html>
